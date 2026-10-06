@@ -126,8 +126,8 @@ extension SidebarBridge {
                 guard let builtIn = item.ref.builtIn else { continue }
                 var info = builtIn.defaultInfo
                 info.isMissing = !(builtInActions[builtIn].map(registered) ?? false)
+                info.isActive = shownPage != nil && TopPageRoute.route(for: item.ref) == shownPage
                 switch builtIn {
-                case .home, .appStore, .settings: info.isActive = shownPage != nil && TopPageRoute.route(for: item.ref) == shownPage
                 case .notifications: info.badge = unread > 0 ? unread : nil
                 case .settings: info.accessory = updateAvailable ? .update : nil
                 default: break
