@@ -1,5 +1,5 @@
 /* This file is generated. Do not edit by hand. */
-/* cmux-tui mux protocol 12, IR c791daea9e2a658f8293f260b364a89979c93c5813028768c8d545339bc50b5e. */
+/* cmux-tui mux protocol 12, IR c5ba001c5b15baa5cfc5f8528595f85ffb18105b517ee6028a2b71f986466f53. */
 
 
 import type * as T from "./types.js";
@@ -1914,6 +1914,12 @@ export interface SubscribeRequest extends CmuxRequestBase {
 }
 export type SubscribeResult = T.EmptyResult;
 
+/** Protocol v12; authority: local-admin. */
+export interface SubscribeActivityRequest extends CmuxRequestBase {
+  cmd: "subscribe-activity";
+}
+export type SubscribeActivityResult = T.ActivitySubscribeResult;
+
 /** Protocol v6; authority: control. */
 export interface SwapPaneRequest extends CmuxRequestBase {
   cmd: "swap-pane";
@@ -2362,6 +2368,7 @@ export type CmuxRequest =
   | SnapshotRequestRequest
   | SplitRequest
   | SubscribeRequest
+  | SubscribeActivityRequest
   | SwapPaneRequest
   | TerminalClipboardReplyRequest
   | TerminalClipboardSubscribeRequest
@@ -3984,6 +3991,14 @@ export interface CmuxCommandDefinitionMap {
     authority: "frontend";
     since: 5;
     capability: null;
+    stream: "subscribe";
+  };
+  "subscribe-activity": {
+    request: SubscribeActivityRequest;
+    result: SubscribeActivityResult;
+    authority: "local-admin";
+    since: 12;
+    capability: "vm-activity-v1";
     stream: "subscribe";
   };
   "swap-pane": {

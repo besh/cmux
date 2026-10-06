@@ -8,7 +8,7 @@ from typing import Mapping, Optional, Tuple
 
 SCHEMA_VERSION = 2
 MUX_PROTOCOL = 12
-IR_SHA256 = 'c791daea9e2a658f8293f260b364a89979c93c5813028768c8d545339bc50b5e'
+IR_SHA256 = 'c5ba001c5b15baa5cfc5f8528595f85ffb18105b517ee6028a2b71f986466f53'
 
 
 @dataclass(frozen=True)
@@ -2713,6 +2713,16 @@ COMMANDS = {
             'tree_events': CommandFieldMetadata(7, None),
         },
     ),
+    'subscribe-activity': CommandMetadata(
+        'subscribe-activity',
+        'local-admin',
+        12,
+        'vm-activity-v1',
+        ('local-admin',),
+        'subscribe',
+        {
+        },
+    ),
     'swap-pane': CommandMetadata(
         'swap-pane',
         'control',
@@ -3086,6 +3096,7 @@ COMMANDS = {
 }
 
 EVENTS = {
+    'activity-changed': EventMetadata('activity-changed', 12, 'vm-activity-v1', ('control',), 'emitted'),
     'agent-changed': EventMetadata('agent-changed', 11, None, ('subscribe',), 'emitted'),
     'bell': EventMetadata('bell', 5, None, ('subscribe',), 'emitted'),
     'bookmarks-changed': EventMetadata('bookmarks-changed', 12, 'bookmarks-v1', ('subscribe',), 'emitted'),

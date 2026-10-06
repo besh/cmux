@@ -1,5 +1,5 @@
 // This file is generated. Do not edit by hand.
-// cmux-tui mux protocol 12, IR c791daea9e2a658f8293f260b364a89979c93c5813028768c8d545339bc50b5e.
+// cmux-tui mux protocol 12, IR c5ba001c5b15baa5cfc5f8528595f85ffb18105b517ee6028a2b71f986466f53.
 // The emitter owns this layout so generation is independent of the installed rustfmt.
 
 use super::metadata::*;
@@ -2723,6 +2723,14 @@ pub struct SubscribeRequest {
 pub type SubscribeResult = T::EmptyResult;
 
 #[rustfmt::skip]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize, Default)]
+pub struct SubscribeActivityRequest {
+}
+
+#[rustfmt::skip]
+pub type SubscribeActivityResult = T::ActivitySubscribeResult;
+
+#[rustfmt::skip]
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct SwapPaneRequest {
     #[serde(default, skip_serializing_if = "Optional::is_missing")]
@@ -4226,6 +4234,10 @@ impl CmuxClient {
             self.require_protocol_field("subscribe", 7)?;
         }
         self.execute_stream(&SUBSCRIBE_METADATA, &request)
+    }
+
+    pub fn subscribe_activity(&mut self, request: SubscribeActivityRequest) -> Result<CmuxStream> {
+        self.execute_stream(&SUBSCRIBE_ACTIVITY_METADATA, &request)
     }
 
     pub fn swap_pane(&mut self, request: SwapPaneRequest) -> Result<SwapPaneResult> {

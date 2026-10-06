@@ -6,6 +6,21 @@
       "size": 2118
     },
     {
+      "path": "ActivityChangedEvent.java",
+      "sha256": "e0c5dbcc7d47336258ab16982c4c5f5b9a39157fc5cbddd9c47d1efc8d29109c",
+      "size": 2345
+    },
+    {
+      "path": "ActivitySnapshot.java",
+      "sha256": "04419a7b4fd3d610114d725f947e061e6084ac3929651f830f28a421e726a0f2",
+      "size": 4759
+    },
+    {
+      "path": "ActivitySubscribeResult.java",
+      "sha256": "5e6895862ed7bdc59e1b1a9ed215d29ad12a86a1a67cb3513248500ef10a86b1",
+      "size": 2050
+    },
+    {
       "path": "AddScreensToScreenGroupRequest.java",
       "sha256": "d5b680f8d2e3c214b44587c2262fdde8b1b1b78798c1320df2c3aa3176b7ddeb",
       "size": 3555
@@ -472,8 +487,8 @@
     },
     {
       "path": "Commands.java",
-      "sha256": "2ba481b75c10f18f1a7a90370f7067cf46dc781b8c6e05eff8079cdf4d606a79",
-      "size": 61247
+      "sha256": "63105b92576b16150d172c5da90a34ae36c1f37bf6ce6557f04df0748d83caf7",
+      "size": 61500
     },
     {
       "path": "ConfigReloadRequestedEvent.java",
@@ -812,8 +827,8 @@
     },
     {
       "path": "Events.java",
-      "sha256": "ee2170099deadffdc97bd5b5f547ac86aec2a76e271f2ac145ba76700a18e6c3",
-      "size": 13449
+      "sha256": "a5bc517c111ec2fe257e92b643ca517c05b3e0a817985c8c5ea1a0a2e19abc75",
+      "size": 13651
     },
     {
       "path": "ExportLayoutRequest.java",
@@ -892,8 +907,8 @@
     },
     {
       "path": "GeneratedCmuxClient.java",
-      "sha256": "e5fb1afbb173f6783f1317e90ae14b71feba32b8f980d7a87ae1cfcc7a8749f9",
-      "size": 53336
+      "sha256": "67aaea3ade6f1110b14b8c2e46b7a6f51239362c9610cb8f55d7504b471293c7",
+      "size": 53495
     },
     {
       "path": "GetBrowserProviderRequest.java",
@@ -1482,8 +1497,8 @@
     },
     {
       "path": "Protocol.java",
-      "sha256": "2318cca9f902b7bb68c54ed12d27e26183381ebcf6e846ecd087187646147edb",
-      "size": 5672
+      "sha256": "53b1b1750fa6d6680daedd307a7e82bfd5beac1f2d92d96d99f3624d47d31c39",
+      "size": 5749
     },
     {
       "path": "ProtocolEvent.java",
@@ -2116,6 +2131,11 @@
       "size": 140
     },
     {
+      "path": "SubscribeActivityRequest.java",
+      "sha256": "09d30f50d9219ccc01c0e0c6625d091adc9e458a449ebdf5ea984dce45ca5c6f",
+      "size": 1408
+    },
+    {
       "path": "SubscribeEvent.java",
       "sha256": "505812bd92e09fd6218b3c45fe01e910fecccc58bb5dd00b91b82138c887b0d0",
       "size": 142
@@ -2602,7 +2622,7 @@
     }
   ],
   "format": 1,
-  "ir_sha256": "c791daea9e2a658f8293f260b364a89979c93c5813028768c8d545339bc50b5e",
+  "ir_sha256": "c5ba001c5b15baa5cfc5f8528595f85ffb18105b517ee6028a2b71f986466f53",
   "language": "java",
   "mux_protocol": 12,
   "schema_version": 2

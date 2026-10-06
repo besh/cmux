@@ -1,5 +1,5 @@
 // This file is generated. Do not edit by hand.
-// cmux-tui mux protocol 12, IR c791daea9e2a658f8293f260b364a89979c93c5813028768c8d545339bc50b5e.
+// cmux-tui mux protocol 12, IR c5ba001c5b15baa5cfc5f8528595f85ffb18105b517ee6028a2b71f986466f53.
 // The emitter owns this layout so generation is independent of the installed rustfmt.
 
 use crate::{Nullable, Optional};
@@ -20,6 +20,21 @@ pub type JsonValue = serde_json::Value;
 pub type PaneRef = serde_json::Value;
 #[rustfmt::skip]
 pub type TabRef = serde_json::Value;
+
+#[rustfmt::skip]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct ActivitySnapshot {
+    pub attached_clients: u32,
+    pub last_agent_action_at_ms: Nullable<u64>,
+    pub last_user_input_at_ms: Nullable<u64>,
+    pub live_agents: u32,
+}
+
+#[rustfmt::skip]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct ActivitySubscribeResult {
+    pub activity: ActivitySnapshot,
+}
 
 #[rustfmt::skip]
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]

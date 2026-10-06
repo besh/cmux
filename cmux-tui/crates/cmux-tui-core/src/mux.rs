@@ -6479,6 +6479,9 @@ impl Mux {
             }
             commit
         };
+        if !commit.replayed && ingress.producer_id == crate::AGENT_HOOK_PRODUCER_ID {
+            self.control_clients.activity.note_agent_action();
+        }
         self.finish_journal_ingress(ingress, origin, idempotency_key, commit)
     }
 
@@ -7517,6 +7520,7 @@ impl Mux {
     }
 
     pub fn emit(&self, event: MuxEvent) {
+        self.control_clients.activity.observe(&event);
         self.subscribers.emit(event);
     }
 
@@ -9294,7 +9298,9 @@ impl Mux {
     /// [`Self::claim_terminal_geometry`] it never adds a participant, so a
     /// one-shot `send` from an unattached connection cannot take the grid.
     pub(crate) fn note_terminal_input(&self, surface: SurfaceId, client: u64) {
-        let _ = self.note_terminal_activity(surface, client, None);
+        if self.note_terminal_activity(surface, client, None).is_some() {
+            self.control_clients.activity.note_user_input();
+        }
     }
 
     /// Activity of the caller's own view (`view:None`) or of one of its relay

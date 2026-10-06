@@ -14,8 +14,10 @@
 namespace cmux::raw {
 
 inline constexpr std::uint32_t kMuxProtocolVersion = 12U;
-inline constexpr std::string_view kProtocolIrSha256 = "c791daea9e2a658f8293f260b364a89979c93c5813028768c8d545339bc50b5e";
+inline constexpr std::string_view kProtocolIrSha256 = "c5ba001c5b15baa5cfc5f8528595f85ffb18105b517ee6028a2b71f986466f53";
 
+struct ActivitySnapshot;
+struct ActivitySubscribeResult;
 struct AgentRecord;
 enum class AgentReportSource;
 struct AgentSessionSource;
@@ -404,6 +406,7 @@ struct SidebarPluginRequest;
 struct SnapshotRequestRequest;
 struct SplitRequest;
 struct SubscribeRequest;
+struct SubscribeActivityRequest;
 struct SwapPaneRequest;
 struct TerminalClipboardReplyRequest;
 struct TerminalClipboardSubscribeRequest;
@@ -433,6 +436,7 @@ struct UrlOpenSubscribeRequest;
 struct VtStateRequest;
 struct WaitForRequest;
 struct ZoomPaneRequest;
+struct ActivityChangedEvent;
 struct AgentChangedEvent;
 struct BellEvent;
 struct BookmarksChangedEvent;
@@ -537,6 +541,24 @@ struct Id {
 struct AckTabNotificationsRequest {
     Id surface{};
     friend bool operator==(const AckTabNotificationsRequest&, const AckTabNotificationsRequest&) = default;
+};
+
+struct ActivitySnapshot {
+    std::uint32_t attached_clients{};
+    std::optional<std::uint64_t> last_agent_action_at_ms{};
+    std::optional<std::uint64_t> last_user_input_at_ms{};
+    std::uint32_t live_agents{};
+    friend bool operator==(const ActivitySnapshot&, const ActivitySnapshot&) = default;
+};
+
+struct ActivityChangedEvent {
+    ActivitySnapshot activity{};
+    friend bool operator==(const ActivityChangedEvent&, const ActivityChangedEvent&) = default;
+};
+
+struct ActivitySubscribeResult {
+    ActivitySnapshot activity{};
+    friend bool operator==(const ActivitySubscribeResult&, const ActivitySubscribeResult&) = default;
 };
 
 struct AddScreensToScreenGroupRequest {
@@ -3936,6 +3958,10 @@ struct StatusEvent {
     friend bool operator==(const StatusEvent&, const StatusEvent&) = default;
 };
 
+struct SubscribeActivityRequest {
+    friend bool operator==(const SubscribeActivityRequest&, const SubscribeActivityRequest&) = default;
+};
+
 enum class SubscribeRequestTreeEvents {
     coarse,
     deltas,
@@ -4523,6 +4549,18 @@ struct ZoomPaneResult {
     bool zoomed{};
     std::optional<Id> zoomed_pane{};
     friend bool operator==(const ZoomPaneResult&, const ZoomPaneResult&) = default;
+};
+
+template <>
+struct Codec<ActivitySnapshot> {
+    static Result<Json> encode(const ActivitySnapshot& value);
+    static Result<ActivitySnapshot> decode(const Json& value);
+};
+
+template <>
+struct Codec<ActivitySubscribeResult> {
+    static Result<Json> encode(const ActivitySubscribeResult& value);
+    static Result<ActivitySubscribeResult> decode(const Json& value);
 };
 
 template <>
@@ -6854,6 +6892,12 @@ struct Codec<SubscribeRequest> {
 };
 
 template <>
+struct Codec<SubscribeActivityRequest> {
+    static Result<Json> encode(const SubscribeActivityRequest& value);
+    static Result<SubscribeActivityRequest> decode(const Json& value);
+};
+
+template <>
 struct Codec<SwapPaneRequest> {
     static Result<Json> encode(const SwapPaneRequest& value);
     static Result<SwapPaneRequest> decode(const Json& value);
@@ -7025,6 +7069,12 @@ template <>
 struct Codec<ZoomPaneRequest> {
     static Result<Json> encode(const ZoomPaneRequest& value);
     static Result<ZoomPaneRequest> decode(const Json& value);
+};
+
+template <>
+struct Codec<ActivityChangedEvent> {
+    static Result<Json> encode(const ActivityChangedEvent& value);
+    static Result<ActivityChangedEvent> decode(const Json& value);
 };
 
 template <>
