@@ -448,6 +448,8 @@ pub enum ResourceOperation {
     WorkspacePlacementList,
     #[serde(rename = "workspace.update")]
     WorkspaceUpdate,
+    #[serde(rename = "workspace.agent_folder.set")]
+    WorkspaceAgentFolderSet,
     #[serde(rename = "workspace_group.create")]
     WorkspaceGroupCreate,
     #[serde(rename = "workspace_group.delete")]
